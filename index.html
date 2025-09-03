@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYCELL Clinic - คลินิกความงามเกาหลี</title>
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init','YOUR_PIXEL_ID');   // ✅ 여기에 픽셀 ID 입력
+    fbq('track','PageView');          // 페이지 진입 추적
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Prompt', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .instruction {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .step {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .line-button {
+            display: inline-block;
+            background: #00c851;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: background 0.3s ease;
+        }
+        
+        .line-button:hover {
+            background: #007e33;
+        }
+        
+        .contact-info {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .hours {
+            font-weight: bold;
+            color: #e17055;
+        }
+        
+        .auto-redirect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .loading {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">MYCELL Clinic</div>
+        <div class="subtitle">คลินิกความงามและผิวหนังแบบเกาหลี</div>
+        
+        <div class="instruction">
+            <h3>วิธีการรับคำปรึกษาความงาม</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                กรอกข้อมูลและปัญหาที่ต้องการปรับปรุง
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                เพิ่ม LINE Official Account
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                ส่งรูปภาพและปรึกษาแพทย์เฉพาะทาง
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                รับคำแนะนำการรักษาที่เหมาะสม
+            </div>
+        </div>
+        
+        <a href="https://lin.ee/SgkGwde" class="line-button" id="lineButton">
+            ปรึกษาแพทย์เฉพาะทาง
+        </a>
+        
+        <div class="contact-info">
+            <p><strong>LINE ID:</strong> @mycell-clinic</p>
+            <p class="hours">เวลาให้คำปรึกษา: จันทร์-ศุกร์ 9:00-18:00</p>
+            <p style="color: #e17055;">หยุดวันพฤหัสบดี เสาร์ อาทิตย์</p>
+        </div>
+    </div>
+    
+    <div class="auto-redirect" id="redirectModal">
+        <h3>กำลังเชื่อมต่อไปยัง LINE...</h3>
+        <div class="loading"></div>
+        <p>กรุณารอสักครู่</p>
+    </div>
+    
+    <script>
+        // Facebook Pixel Event Tracking
+        document.getElementById('lineButton').addEventListener('click', function() {
+            fbq('track', 'Contact');
+            
+            // Show redirect modal
+            document.getElementById('redirectModal').style.display = 'block';
+            
+            // Auto redirect after 2 seconds
+            setTimeout(function() {
+                window.open('https://lin.ee/SgkGwde', '_blank');
+                document.getElementById('redirectModal').style.display = 'none';
+            }, 2000);
+        });
+        
+        // Auto redirect after 10 seconds on page load
+        setTimeout(function() {
+            if (confirm('คุณต้องการปรึกษาแพทย์เฉพาะทางผ่าน LINE หรือไม่?')) {
+                fbq('track', 'Contact');
+                window.open('https://lin.ee/SgkGwde', '_blank');
+            }
+        }, 10000);
+    </script>
+    
+<script>
+  // ====== 유틸 ======
+  function genEventId() {
+    return 'cid-' + Date.now() + '-' + Math.random().toString(36).slice(2,10);
+  }
+  function getCookie(name) {
+    const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function getFbc() {
+    // URL에 fbclid가 있으면 _fbc 형식으로 생성
+    const params = new URLSearchParams(location.search);
+    const fbclid = params.get('fbclid');
+    if (fbclid) return `fb.1.${Date.now()}.${fbclid}`;
+    // 없으면 쿠키에서
+    return getCookie('_fbc') || '';
+  }
+
+  async function sendLeadToServer(eventId) {
+    try {
+      console.log('📨 sendLeadToServer() 시작, eventId:', eventId);
+      
+      const email = (document.querySelector('input[name="email"]') || {}).value || '';
+      const phone = (document.querySelector('input[name="phone"]') || {}).value || '';
+
+      const payload = {
+        eventId,
+        eventSourceUrl: location.href,
+        email,
+        phone,
+        fbp: getCookie('_fbp') || '',
+        fbc: getFbc(),
+        userAgent: navigator.userAgent
+      };
+
+      console.log('📋 전송할 payload:', payload);
+      console.log('🌐 /api/lead 요청 시작...');
+
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload),
+        keepalive: true // 탭 닫혀도 전송 시도
+      });
+
+      console.log('📡 서버 응답 상태:', response.status);
+      const result = await response.json();
+      console.log('📄 서버 응답 내용:', result);
+      console.log('🔍 상세 Meta 응답:', result.meta);
+      
+      if (response.ok) {
+        console.log('✅ CAPI 전송 성공!');
+      } else {
+        console.log('❌ CAPI 전송 실패:', result);
+      }
+    } catch(e) {
+      console.error('🚨 CAPI 전송 에러:', e);
+    }
+  }
+
+  // ====== 리드 전송 훅(버튼/폼에 연결) ======
+  function trackLeadWithDedup() {
+    console.log('🚀 trackLeadWithDedup() 호출됨');
+    const eventId = genEventId();
+    console.log('📋 생성된 eventId:', eventId);
+    
+    // 브라우저 픽셀(Lead)
+    if (typeof window.fbq === 'function') {
+      console.log('✅ fbq 함수 존재 - 브라우저 픽셀 전송');
+      fbq('track', 'Lead', {}, { eventID: eventId });
+    } else {
+      console.log('❌ fbq 함수 없음');
+    }
+    
+    // 서버(CAPI) 동시 전송
+    console.log('🌐 서버 CAPI 전송 시작');
+    sendLeadToServer(eventId);
+  }
+
+  // 1) 버튼 클릭 시 Lead
+  const lineBtn = document.getElementById('lineButton');
+  if (lineBtn) {
+    lineBtn.addEventListener('click', trackLeadWithDedup);
+  }
+
+  // 2) 폼 제출 시 Lead
+  const leadForm = document.getElementById('leadForm');
+  if (leadForm) {
+    leadForm.addEventListener('submit', function () {
+      trackLeadWithDedup();
+    });
+  }
+</script>
+</body>
+</html>
