@@ -1,8 +1,8 @@
 // /api/lead.js  — Vercel Serverless Function (Node 18/20)
 const crypto = require('crypto');
 
-const PIXEL_ID = 'YOUR_PIXEL_ID';
-const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;        // Vercel env
+const PIXEL_ID = '742160555457168';
+const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || 'EAAKnxXipVygBPbaQyNHEvDsjkIwZAIM369UXCt9ysEFOF0HYZBeCadogBt0tZBFjTmeg8z0iK94CDtZCgmE3yjN99sCL3litw7lGNkmWTYGyiRfc18HD51Wx1NJrs00D2ICnItwGX9mOy9XOhxVoGU4uxpgT7M37KQstxa4U9d3U3SeBNlLxxoo50gzSZCdLbHgZDZD';        // Vercel env
 const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE;  // (테스트용) 없으면 자동 제외
 
 function sha256Lower(s) {
@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
         event_time: Math.floor(Date.now()/1000),
         event_id: eventId || `srv-${Date.now()}`,
         action_source: 'website',
-        event_source_url: eventSourceUrl || 'https://koreandiet.store/',
+        event_source_url: eventSourceUrl || 'https://mycellth.vercel.app/',
         user_data: {
           em: email ? [sha256Lower(email)] : undefined,
           ph: phone ? [sha256Phone(phone)] : undefined,
