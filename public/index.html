@@ -284,8 +284,8 @@
     // 브라우저 픽셀(Lead) - 전환 이벤트
     if (typeof window.fbq === 'function') {
       console.log('✅ fbq 함수 존재 - 브라우저 픽셀 전송');
-      fbq('track', 'LineFriendAdd', {}, { eventID: eventId });
-      console.log('📊 Facebook Pixel LineFriendAdd 이벤트 전송 완료');
+      fbq('trackCustom', 'LineFriendAdd', {}, { eventID: eventId });
+      console.log('📊 Facebook Pixel LineFriendAdd(trackCustom) 이벤트 전송 완료');
     } else {
       console.log('❌ fbq 함수 없음 - 픽셀 로드 실패, 큐에 추가 시도');
       // 픽셀이 아직 로드되지 않은 경우 큐에 저장
