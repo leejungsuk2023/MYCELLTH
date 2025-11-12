@@ -293,10 +293,10 @@
         // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
         const eventId = trackLeadWithDedup();
 
-        // CAPI/Fbq 호출이 시작될 시간을 준 뒤 LINE으로 이동
+        // CAPI/Fbq 호출이 시작될 시간을 준 뒤 같은 탭에서 LINE으로 이동
         setTimeout(function() {
-          window.open(lineBtn.href, '_blank', 'noopener');
-        }, 1500);
+          window.location.href = lineBtn.href;
+        }, 1200);
       });
     } else {
       console.log('❌ 라인 버튼을 찾을 수 없음');
@@ -318,8 +318,8 @@
         const eventId = trackLeadWithDedup();
         setTimeout(function() {
           const target = lineBtn ? lineBtn.href : LINE_URL;
-          window.open(target, '_blank', 'noopener');
-        }, 1500);
+          window.location.href = target;
+        }, 1200);
       }
     }, 10000);
   }
