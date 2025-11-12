@@ -311,19 +311,24 @@
     if (lineBtn) {
       console.log('✅ 라인 버튼 찾음 - 이벤트 리스너 등록');
       lineBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // 기본 이동을 막아 리드 트래킹 시간을 확보
         console.log('🎯 라인 버튼 클릭됨');
+
         // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
         trackLeadWithDedup();
 
-        // 모달 표시 (사용자 경험 개선)
         const modal = document.getElementById('redirectModal');
         if (modal) {
           modal.style.display = 'block';
-          // 모달 자동 닫기 (링크 이동은 HTML href 속성에 맡김)
-          setTimeout(function() {
-            modal.style.display = 'none';
-          }, 2000);
         }
+
+        // CAPI/Fbq 호출이 시작될 시간을 준 뒤 LINE으로 이동
+        setTimeout(function() {
+          window.open(lineBtn.href, '_blank', 'noopener');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+        }, 1500);
       });
     } else {
       console.log('❌ 라인 버튼을 찾을 수 없음');
@@ -333,7 +338,8 @@
     const leadForm = document.getElementById('leadForm');
     if (leadForm) {
       console.log('✅ 리드 폼 찾음 - 이벤트 리스너 등록');
-      leadForm.addEventListener('submit', function () {
+      leadForm.addEventListener('submit', function (event) {
+        event.preventDefault();
         trackLeadWithDedup();
       });
     }
