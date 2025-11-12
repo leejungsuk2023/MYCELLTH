@@ -3,6 +3,10 @@
   "outputDirectory": "public",
   "rewrites": [
     {
+      "source": "/r/line",
+      "destination": "/api/line-bridge"
+    },
+    {
       "source": "/((?!api).*)",
       "destination": "/index.html"
     }
