@@ -293,7 +293,10 @@
   // 1) 버튼 클릭 시 Lead
   const lineBtn = document.getElementById('lineButton');
   if (lineBtn) {
-    lineBtn.addEventListener('click', trackLeadWithDedup);
+    lineBtn.addEventListener('click', function(event) {
+      event.preventDefault(); // 기본 링크 동작 방지
+      trackLeadWithDedup();
+    });
   }
 
   // 2) 폼 제출 시 Lead
