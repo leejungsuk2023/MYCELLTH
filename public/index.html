@@ -267,35 +267,35 @@
     console.log('🚀 trackLeadWithDedup() 호출됨');
     const eventId = genEventId();
     console.log('📋 생성된 eventId:', eventId);
-    
+
     // 브라우저 픽셀(Lead) - 전환 이벤트
     if (typeof window.fbq === 'function') {
       console.log('✅ fbq 함수 존재 - 브라우저 픽셀 전송');
       fbq('track', 'Lead', {}, { eventID: eventId });
+      console.log('📊 Facebook Pixel Lead 이벤트 전송 완료');
     } else {
-      console.log('❌ fbq 함수 없음');
+      console.log('❌ fbq 함수 없음 - 픽셀 로드 실패');
     }
-    
+
     // 서버(CAPI) 동시 전송
     console.log('🌐 서버 CAPI 전송 시작');
     sendLeadToServer(eventId);
-    
-    // 리다이렉트 모달 표시
-    document.getElementById('redirectModal').style.display = 'block';
-    
-    // 2초 후 LINE으로 리다이렉트
-    setTimeout(function() {
-      window.open('https://lin.ee/50Ghw2L', '_blank');
-      document.getElementById('redirectModal').style.display = 'none';
-    }, 2000);
   }
 
   // 1) 버튼 클릭 시 Lead
   const lineBtn = document.getElementById('lineButton');
   if (lineBtn) {
     lineBtn.addEventListener('click', function(event) {
-      event.preventDefault(); // 기본 링크 동작 방지
+      // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
       trackLeadWithDedup();
+
+      // 모달 표시 (사용자 경험 개선)
+      document.getElementById('redirectModal').style.display = 'block';
+
+      // 모달 자동 닫기 (링크 이동은 HTML href 속성에 맡김)
+      setTimeout(function() {
+        document.getElementById('redirectModal').style.display = 'none';
+      }, 2000);
     });
   }
 
