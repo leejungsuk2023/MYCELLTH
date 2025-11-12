@@ -10,6 +10,19 @@ function sha256Lower(s) {
 function sha256Phone(s) {
   return crypto.createHash('sha256').update((s || '').replace(/[^\d]/g,'')).digest('hex');
 }
+function getClientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    const ip = forwarded.split(',')[0].trim();
+    if (ip) return ip;
+  }
+  return (req.socket && req.socket.remoteAddress) || '';
+}
+function getExternalIdHash(email, phone) {
+  if (email) return sha256Lower(email);
+  if (phone) return sha256Phone(phone);
+  return '';
+}
 
 // Node 기본 req에서 JSON 바디 파서
 async function readJson(req) {
@@ -40,6 +53,9 @@ module.exports = async (req, res) => {
     }
 
     const { eventId, eventSourceUrl, email, phone, fbp, fbc, userAgent } = await readJson(req);
+    const clientIp = getClientIp(req);
+    const ua = userAgent || req.headers['user-agent'] || '';
+    const externalId = getExternalIdHash(email, phone);
 
     const payload = {
       data: [{
@@ -53,7 +69,9 @@ module.exports = async (req, res) => {
           ph: phone ? [sha256Phone(phone)] : undefined,
           fbp: fbp || undefined,
           fbc: fbc || undefined,
-          client_user_agent: userAgent || undefined,
+          client_user_agent: ua || undefined,
+          client_ip_address: clientIp || undefined,
+          external_id: externalId ? [externalId] : undefined,
         },
         custom_data: { currency: 'KRW', value: 0 }
       }]

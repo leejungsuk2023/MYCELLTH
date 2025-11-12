@@ -177,7 +177,7 @@
             </div>
         </div>
         
-        <a href="/r/line" class="line-button" id="lineButton">
+        <a href="https://lin.ee/50Ghw2L" class="line-button" id="lineButton">
             ปรึกษาแพทย์เฉพาะทาง
         </a>
         
@@ -194,17 +194,9 @@
         <p>กรุณารอสักครู่</p>
     </div>
     
-    <script>
-        // Auto redirect after 10 seconds on page load
-        setTimeout(function() {
-            if (confirm('คุณต้องการปรึกษาแพทย์เฉพาะทางผ่าน LINE หรือไม่?')) {
-                redirectToLineBridge();
-            }
-        }, 10000);
-    </script>
-    
 <script>
   // ====== 유틸 ======
+  const LINE_URL = 'https://lin.ee/50Ghw2L';
   function genEventId() {
     return 'cid-' + Date.now() + '-' + Math.random().toString(36).slice(2,10);
   }
@@ -212,12 +204,32 @@
     const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : '';
   }
-  function getFbc() {
-    // URL에 fbclid가 있으면 _fbc 형식으로 생성
+  const COOKIE_MAX_AGE_DAYS = 180;
+
+  function setCookie(name, value, days = COOKIE_MAX_AGE_DAYS) {
+    const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = `${name}=${value}; path=/; expires=${expires}; SameSite=Lax; Secure`;
+  }
+
+  function ensureFbpCookie() {
+    if (!getCookie('_fbp')) {
+      const newFbp = `fb.1.${Date.now()}.${Math.random().toString(36).slice(2,10)}`;
+      setCookie('_fbp', newFbp);
+      console.log('🧁 _fbp 쿠키 생성:', newFbp);
+    }
+  }
+
+  function ensureFbcFromQuery() {
     const params = new URLSearchParams(location.search);
     const fbclid = params.get('fbclid');
-    if (fbclid) return `fb.1.${Date.now()}.${fbclid}`;
-    // 없으면 쿠키에서
+    if (fbclid) {
+      const newFbc = `fb.1.${Date.now()}.${fbclid}`;
+      setCookie('_fbc', newFbc, 90);
+      console.log('🧁 _fbc 쿠키 생성 (fbclid 기반):', newFbc);
+    }
+  }
+
+  function getFbc() {
     return getCookie('_fbc') || '';
   }
 
@@ -232,6 +244,10 @@
       console.log('  - fbq.version:', window.fbq.version);
     }
   }
+
+  // 초기 쿠키 세팅
+  ensureFbcFromQuery();
+  ensureFbpCookie();
 
   // ====== 리드 전송 훅(버튼/폼에 연결) ======
   function trackLeadWithDedup() {
@@ -253,23 +269,11 @@
       }
     }
 
-    // 서버(CAPI)는 브릿지(/r/line)에서 전송됨
-    console.log('📊 브라우저 픽셀 전송 완료 - CAPI는 브릿지에서 전송');
+    // 서버(CAPI) 동시 전송
+    console.log('🌐 서버 CAPI 전송 시작');
+    sendLeadToServer(eventId);
 
     return eventId;
-  }
-
-  function buildBridgeUrl(eventId) {
-    const url = new URL('/r/line', location.origin);
-    const existingCid = new URLSearchParams(location.search).get('cid');
-    const cid = existingCid || eventId || genEventId();
-    url.searchParams.set('cid', cid);
-    return url.toString();
-  }
-
-  function redirectToLineBridge(eventId) {
-    const bridgeUrl = buildBridgeUrl(eventId);
-    window.open(bridgeUrl, '_blank');
   }
 
   // DOM 로드 완료 후 이벤트 리스너 등록
@@ -289,9 +293,9 @@
         // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
         const eventId = trackLeadWithDedup();
 
-        // CAPI/Fbq 호출이 시작될 시간을 준 뒤 LINE 브리지로 이동
+        // CAPI/Fbq 호출이 시작될 시간을 준 뒤 LINE으로 이동
         setTimeout(function() {
-          redirectToLineBridge(eventId);
+          window.open(lineBtn.href, '_blank', 'noopener');
         }, 1500);
       });
     } else {
@@ -307,6 +311,17 @@
         trackLeadWithDedup();
       });
     }
+
+    // 3) 페이지 체류 10초 후 자동 안내
+    setTimeout(function() {
+      if (confirm('คุณต้องการปรึกษาแพทย์เฉพาะทางผ่าน LINE หรือไม่?')) {
+        const eventId = trackLeadWithDedup();
+        setTimeout(function() {
+          const target = lineBtn ? lineBtn.href : LINE_URL;
+          window.open(target, '_blank', 'noopener');
+        }, 1500);
+      }
+    }, 10000);
   }
 
   // DOM 로드 완료 시 이벤트 리스너 초기화
