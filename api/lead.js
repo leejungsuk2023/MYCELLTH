@@ -3,7 +3,6 @@ const crypto = require('crypto');
 
 const PIXEL_ID = '742160555457168';
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || 'EAAKnxXipVygBPbaQyNHEvDsjkIwZAIM369UXCt9ysEFOF0HYZBeCadogBt0tZBFjTmeg8z0iK94CDtZCgmE3yjN99sCL3litw7lGNkmWTYGyiRfc18HD51Wx1NJrs00D2ICnItwGX9mOy9XOhxVoGU4uxpgT7M37KQstxa4U9d3U3SeBNlLxxoo50gzSZCdLbHgZDZD';        // Vercel env
-const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE;  // (테스트용) 없으면 자동 제외
 
 function sha256Lower(s) {
   return crypto.createHash('sha256').update((s || '').trim().toLowerCase()).digest('hex');
@@ -56,8 +55,7 @@ module.exports = async (req, res) => {
           fbc: fbc || undefined,
           client_user_agent: userAgent || undefined,
         },
-        custom_data: { currency: 'KRW', value: 0 },
-        ...(TEST_EVENT_CODE ? { test_event_code: TEST_EVENT_CODE } : {})
+        custom_data: { currency: 'KRW', value: 0 }
       }]
     };
 
