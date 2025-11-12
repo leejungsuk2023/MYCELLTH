@@ -16,6 +16,7 @@
 
     fbq('init','742160555457168');   // ✅ MYCELL Clinic 픽셀 ID
     fbq('track','PageView');          // 페이지 진입 추적
+    console.log('📱 Facebook Pixel 초기화 완료 - Pixel ID: 742160555457168');
     </script>
     <noscript>
       <img height="1" width="1" style="display:none"
@@ -220,6 +221,18 @@
     return getCookie('_fbc') || '';
   }
 
+  // 픽셀 로드 상태 확인 유틸리티
+  function checkPixelStatus() {
+    console.log('🔍 픽셀 상태 확인:');
+    console.log('  - fbq 함수 존재:', typeof window.fbq === 'function');
+    console.log('  - fbq 객체 존재:', !!window.fbq);
+    if (window.fbq) {
+      console.log('  - fbq.queue 존재:', !!window.fbq.queue);
+      console.log('  - fbq.loaded:', window.fbq.loaded);
+      console.log('  - fbq.version:', window.fbq.version);
+    }
+  }
+
   async function sendLeadToServer(eventId) {
     try {
       console.log('📨 sendLeadToServer() 시작, eventId:', eventId);
@@ -274,7 +287,12 @@
       fbq('track', 'Lead', {}, { eventID: eventId });
       console.log('📊 Facebook Pixel Lead 이벤트 전송 완료');
     } else {
-      console.log('❌ fbq 함수 없음 - 픽셀 로드 실패');
+      console.log('❌ fbq 함수 없음 - 픽셀 로드 실패, 큐에 추가 시도');
+      // 픽셀이 아직 로드되지 않은 경우 큐에 저장
+      if (window.fbq && window.fbq.queue) {
+        window.fbq.queue.push(['track', 'Lead', {}, { eventID: eventId }]);
+        console.log('📋 이벤트 큐에 Lead 이벤트 추가됨');
+      }
     }
 
     // 서버(CAPI) 동시 전송
@@ -282,29 +300,50 @@
     sendLeadToServer(eventId);
   }
 
-  // 1) 버튼 클릭 시 Lead
-  const lineBtn = document.getElementById('lineButton');
-  if (lineBtn) {
-    lineBtn.addEventListener('click', function(event) {
-      // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
-      trackLeadWithDedup();
+  // DOM 로드 완료 후 이벤트 리스너 등록
+  function initEventListeners() {
+    console.log('🔧 이벤트 리스너 초기화 시작');
+    // 픽셀 상태 확인
+    checkPixelStatus();
 
-      // 모달 표시 (사용자 경험 개선)
-      document.getElementById('redirectModal').style.display = 'block';
+    // 1) 버튼 클릭 시 Lead
+    const lineBtn = document.getElementById('lineButton');
+    if (lineBtn) {
+      console.log('✅ 라인 버튼 찾음 - 이벤트 리스너 등록');
+      lineBtn.addEventListener('click', function(event) {
+        console.log('🎯 라인 버튼 클릭됨');
+        // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
+        trackLeadWithDedup();
 
-      // 모달 자동 닫기 (링크 이동은 HTML href 속성에 맡김)
-      setTimeout(function() {
-        document.getElementById('redirectModal').style.display = 'none';
-      }, 2000);
-    });
+        // 모달 표시 (사용자 경험 개선)
+        const modal = document.getElementById('redirectModal');
+        if (modal) {
+          modal.style.display = 'block';
+          // 모달 자동 닫기 (링크 이동은 HTML href 속성에 맡김)
+          setTimeout(function() {
+            modal.style.display = 'none';
+          }, 2000);
+        }
+      });
+    } else {
+      console.log('❌ 라인 버튼을 찾을 수 없음');
+    }
+
+    // 2) 폼 제출 시 Lead
+    const leadForm = document.getElementById('leadForm');
+    if (leadForm) {
+      console.log('✅ 리드 폼 찾음 - 이벤트 리스너 등록');
+      leadForm.addEventListener('submit', function () {
+        trackLeadWithDedup();
+      });
+    }
   }
 
-  // 2) 폼 제출 시 Lead
-  const leadForm = document.getElementById('leadForm');
-  if (leadForm) {
-    leadForm.addEventListener('submit', function () {
-      trackLeadWithDedup();
-    });
+  // DOM 로드 완료 시 이벤트 리스너 초기화
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEventListeners);
+  } else {
+    initEventListeners();
   }
 </script>
 </body>
