@@ -146,13 +146,39 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .header-images {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .header-image-container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .header-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">MYCELL Clinic</div>
         <div class="subtitle">คลินิกความงามและผิวหนังแบบเกาหลี</div>
-        
+
+        <!-- Header Image Holder -->
+        <div class="header-images">
+            <div class="header-image-container">
+                <img class="header-image" src="/header-image.png" alt="MYCELL Clinic" />
+            </div>
+        </div>
+
         <div class="instruction">
             <h3>วิธีการรับคำปรึกษาความงาม</h3>
             
