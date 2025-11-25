@@ -222,7 +222,38 @@
     
 <script>
   // ====== 유틸 ======
-  const LINE_URL = 'https://lin.ee/50Ghw2L';
+  const LINE_ID = '@mycell-clinic';
+
+  // 모바일 디바이스 감지
+  function isMobile() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    // iOS, Android, Windows Phone 등 모바일 디바이스 감지
+    const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i;
+    return mobileRegex.test(userAgent);
+  }
+
+  // 디바이스별 LINE URL 반환
+  function getLineURL() {
+    const mobile = isMobile();
+    let url;
+
+    if (mobile) {
+      // 모바일: line:// 스킴으로 앱 즉시 실행
+      url = `line://ti/p/${LINE_ID}`;
+    } else {
+      // PC: https://line.me 웹 링크
+      url = `https://line.me/R/ti/p/${LINE_ID}`;
+    }
+
+    console.log(`📱 디바이스 타입: ${mobile ? '모바일' : 'PC'}`);
+    console.log(`🔗 사용할 LINE URL: ${url}`);
+
+    return url;
+  }
+
+  // 전역 LINE_URL (호환성 유지)
+  const LINE_URL = getLineURL();
+
   function genEventId() {
     return 'cid-' + Date.now() + '-' + Math.random().toString(36).slice(2,10);
   }
@@ -354,7 +385,10 @@
     // 1) 버튼 클릭 시 Lead
     const lineBtn = document.getElementById('lineButton');
     if (lineBtn) {
-      console.log('✅ 라인 버튼 찾음 - 이벤트 리스너 등록');
+      // 디바이스에 맞는 LINE URL로 동적 업데이트
+      lineBtn.href = LINE_URL;
+      console.log('✅ 라인 버튼 찾음 - href 업데이트:', LINE_URL);
+      console.log('✅ 이벤트 리스너 등록');
       lineBtn.addEventListener('click', function(event) {
         event.preventDefault(); // 기본 이동을 막아 리드 트래킹 시간을 확보
         console.log('🎯 라인 버튼 클릭됨');
