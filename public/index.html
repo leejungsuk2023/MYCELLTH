@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="facebook-domain-verification" content="x0gmilmgkfk4uen7tr5z4jl4ijho0r" />
-    <title>MYCELL Clinic - คลินิกความงามเกาหลี | CAPI Integrated</title>
-    
+    <title>MYCELL Clinic - โปรโมชั่นพิเศษสำหรับคนไทยในเกาหลี</title>
+
+    <!-- Google Fonts - Prompt for Thai -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Facebook Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -14,8 +17,8 @@
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
     (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init','742160555457168');   // ✅ MYCELL Clinic 픽셀 ID
-    fbq('track','PageView');          // 페이지 진입 추적
+    fbq('init','742160555457168');
+    fbq('track','PageView');
     console.log('📱 Facebook Pixel 초기화 완료 - Pixel ID: 742160555457168');
     </script>
     <noscript>
@@ -23,203 +26,401 @@
            src="https://www.facebook.com/tr?id=742160555457168&ev=PageView&noscript=1" />
     </noscript>
     <!-- End Facebook Pixel Code -->
-    
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Prompt', Arial, sans-serif;
+            font-family: 'Prompt', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: #f5f5f5;
+            padding-bottom: 80px; /* Space for sticky CTA */
         }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%),
+                        url('/header-image.png') center/cover no-repeat;
+            color: white;
+            padding: 60px 20px;
             text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #667eea;
+
+        .hero-badge {
+            background: #ff4757;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
             margin-bottom: 20px;
+            display: inline-block;
         }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #666;
+
+        .hero h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            max-width: 600px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        /* ========== PRICING SECTION ========== */
+        .pricing-section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
             margin-bottom: 30px;
         }
-        
-        .instruction {
-            background: #f8f9ff;
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
             padding: 25px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
-        
-        .step {
-            margin: 15px 0;
-            font-size: 1.1rem;
-        }
-        
-        .step-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            line-height: 30px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        
-        .line-button {
-            display: inline-block;
-            background: #00c851;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 25px;
+
+        .pricing-card-title {
             font-size: 1.2rem;
-            font-weight: bold;
-            margin: 20px 0;
-            transition: background 0.3s ease;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
         }
-        
-        .line-button:hover {
-            background: #007e33;
+
+        .price-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
         }
-        
-        .contact-info {
-            background: #fff3cd;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid #ffeaa7;
+
+        .price-item:last-child {
+            border-bottom: none;
         }
-        
-        .hours {
-            font-weight: bold;
-            color: #e17055;
+
+        .price-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
         }
-        
-        .auto-redirect {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
+
+        .price-values {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-original {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .price-sale {
+            color: #ff4757;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* ========== TRUST SECTION ========== */
+        .trust-section {
+            padding: 40px 20px;
+            background: white;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .trust-item {
             text-align: center;
-            display: none;
+            padding: 20px;
+        }
+
+        .trust-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .trust-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .trust-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* ========== STICKY BOTTOM CTA ========== */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #00c851 0%, #007e33 100%);
+            padding: 15px 20px;
             z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
         }
-        
-        .loading {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+
+        .cta-button {
+            display: block;
+            background: white;
+            color: #00c851;
+            text-align: center;
+            padding: 15px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            max-width: 500px;
+            margin: 0 auto;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .cta-free-gift {
+            text-align: center;
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 15px;
+                min-height: 350px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-button {
+                font-size: 0.95rem;
+                padding: 12px 20px;
+            }
+        }
+
+        /* ========== LOADING MODAL ========== */
+        .loading-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .loading-modal.show {
+            display: flex;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid #00c851;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
+            margin: 0 auto 20px;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .header-images {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .header-image-container {
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .header-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">MYCELL Clinic</div>
-        <div class="subtitle">คลินิกความงามและผิวหนังแบบเกาหลี</div>
 
-        <!-- Header Image Holder -->
-        <div class="header-images">
-            <div class="header-image-container">
-                <img class="header-image" src="/header-image.png" alt="MYCELL Clinic" />
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero">
+        <span class="hero-badge">🎉 พฤศจิกายน 2024</span>
+        <h1>คนไทยในเกาหลีห้ามพลาด! โปรโมชั่นพิเศษ เดือนพฤศจิกายน</h1>
+        <p>ไม่ต้องจ่ายเพิ่มเหมือนนักท่องเที่ยว ราคาเดียวกับคนเกาหลี 100%</p>
+    </section>
+
+    <!-- ========== PRICING SECTION ========== -->
+    <section class="pricing-section">
+        <h2 class="section-title">💎 ราคาโปรโมชั่นพิเศษ</h2>
+
+        <div class="pricing-grid">
+            <!-- Lifting Card -->
+            <div class="pricing-card">
+                <h3 class="pricing-card-title">✨ Lifting</h3>
+
+                <div class="price-item">
+                    <div class="price-name">Ulthera 300 shot</div>
+                    <div class="price-values">
+                        <span class="price-original">800,000₩</span>
+                        <span class="price-sale">600,000₩</span>
+                    </div>
+                </div>
+
+                <div class="price-item">
+                    <div class="price-name">Ulthera 300 + Therma 300</div>
+                    <div class="price-values">
+                        <span class="price-original">1,200,000₩</span>
+                        <span class="price-sale">890,000₩</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botox Card -->
+            <div class="pricing-card">
+                <h3 class="pricing-card-title">💉 Botox</h3>
+
+                <div class="price-item">
+                    <div class="price-name">Jaw 50 units</div>
+                    <div class="price-values">
+                        <span class="price-original">50,000₩</span>
+                        <span class="price-sale">19,800₩</span>
+                    </div>
+                </div>
+
+                <div class="price-item">
+                    <div class="price-name">Body 100 units</div>
+                    <div class="price-values">
+                        <span class="price-original">150,000₩</span>
+                        <span class="price-sale">75,000₩</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filler Card -->
+            <div class="pricing-card">
+                <h3 class="pricing-card-title">💧 Filler</h3>
+
+                <div class="price-item">
+                    <div class="price-name">Forehead 3cc + Botox</div>
+                    <div class="price-values">
+                        <span class="price-original">200,000₩</span>
+                        <span class="price-sale">99,000₩</span>
+                    </div>
+                </div>
+
+                <div class="price-item">
+                    <div class="price-name">Lip 1cc + Botox</div>
+                    <div class="price-values">
+                        <span class="price-original">150,000₩</span>
+                        <span class="price-sale">79,000₩</span>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="instruction">
-            <h3>วิธีการรับคำปรึกษาความงาม</h3>
-            
-            <div class="step">
-                <span class="step-number">1</span>
-                กรอกข้อมูลและปัญหาที่ต้องการปรับปรุง
+    <!-- ========== TRUST SECTION ========== -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon">💰</div>
+                <div class="trust-title">ราคาตามป้าย ไม่บวกเพิ่มหน้างาน</div>
+                <div class="trust-desc">No Hidden Cost</div>
             </div>
-            
-            <div class="step">
-                <span class="step-number">2</span>
-                เพิ่ม LINE Official Account
+
+            <div class="trust-item">
+                <div class="trust-icon">📦</div>
+                <div class="trust-title">แกะกล่องยา/หัวทิปใหม่ ต่อหน้าคุณ</div>
+                <div class="trust-desc">Genuine Product</div>
             </div>
-            
-            <div class="step">
-                <span class="step-number">3</span>
-                ส่งรูปภาพและปรึกษาแพทย์เฉพาะทาง
-            </div>
-            
-            <div class="step">
-                <span class="step-number">4</span>
-                รับคำแนะนำการรักษาที่เหมาะสม
+
+            <div class="trust-item">
+                <div class="trust-icon">🇹🇭</div>
+                <div class="trust-title">มีเจ้าหน้าที่คนไทย ดูแลตลอดการรักษา</div>
+                <div class="trust-desc">Thai Staff Available</div>
             </div>
         </div>
-        
-        <a href="https://lin.ee/50Ghw2L" class="line-button" id="lineButton">
-            ปรึกษาแพทย์เฉพาะทาง
+    </section>
+
+    <!-- ========== STICKY BOTTOM CTA ========== -->
+    <div class="sticky-cta">
+        <a href="https://line.me/R/ti/p/@mycell-clinic" class="cta-button" id="lineButton">
+            👉 แอดไลน์และพิมพ์เลข '1' เพื่อรับสิทธิ์
         </a>
-        
-        <div class="contact-info">
-            <p><strong>LINE ID:</strong> @mycell-clinic</p>
-            <p class="hours">เวลาให้คำปรึกษา: จันทร์-ศุกร์ 9:00-18:00</p>
-            <p style="color: #e17055;">หยุดวันพฤหัสบดี เสาร์ อาทิตย์</p>
+        <div class="cta-free-gift">🎁 รับฟรี! โบท็อกซ์ 1 จุด</div>
+    </div>
+
+    <!-- ========== LOADING MODAL ========== -->
+    <div class="loading-modal" id="loadingModal">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>กำลังเชื่อมต่อไปยัง LINE...</p>
         </div>
     </div>
-    
-    <div class="auto-redirect" id="redirectModal">
-        <h3>กำลังเชื่อมต่อไปยัง LINE...</h3>
-        <div class="loading"></div>
-        <p>กรุณารอสักครู่</p>
-    </div>
-    
+
 <script>
   // ====== 유틸 ======
   const LINE_ID = '@mycell-clinic';
@@ -227,7 +428,6 @@
   // 모바일 디바이스 감지
   function isMobile() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    // iOS, Android, Windows Phone 등 모바일 디바이스 감지
     const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i;
     return mobileRegex.test(userAgent);
   }
@@ -238,10 +438,8 @@
     let url;
 
     if (mobile) {
-      // 모바일: line:// 스킴으로 앱 즉시 실행
       url = `line://ti/p/${LINE_ID}`;
     } else {
-      // PC: https://line.me 웹 링크
       url = `https://line.me/R/ti/p/${LINE_ID}`;
     }
 
@@ -251,16 +449,17 @@
     return url;
   }
 
-  // 전역 LINE_URL (호환성 유지)
   const LINE_URL = getLineURL();
 
   function genEventId() {
     return 'cid-' + Date.now() + '-' + Math.random().toString(36).slice(2,10);
   }
+
   function getCookie(name) {
     const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : '';
   }
+
   const COOKIE_MAX_AGE_DAYS = 180;
 
   function setCookie(name, value, days = COOKIE_MAX_AGE_DAYS) {
@@ -290,7 +489,6 @@
     return getCookie('_fbc') || '';
   }
 
-  // 픽셀 로드 상태 확인 유틸리티
   function checkPixelStatus() {
     console.log('🔍 픽셀 상태 확인:');
     console.log('  - fbq 함수 존재:', typeof window.fbq === 'function');
@@ -311,14 +509,11 @@
     try {
       console.log('📨 sendLeadToServer() 시작, eventId:', eventId);
 
-      const email = (document.querySelector('input[name="email"]') || {}).value || '';
-      const phone = (document.querySelector('input[name="phone"]') || {}).value || '';
-
       const payload = {
         eventId,
         eventSourceUrl: location.href,
-        email,
-        phone,
+        email: '',
+        phone: '',
         fbp: getCookie('_fbp') || '',
         fbc: getFbc(),
         userAgent: navigator.userAgent
@@ -331,7 +526,7 @@
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(payload),
-        keepalive: true // 탭 닫혀도 전송 시도
+        keepalive: true
       });
 
       console.log('📡 서버 응답 상태:', response.status);
@@ -349,82 +544,72 @@
     }
   }
 
-  // ====== 리드 전송 훅(버튼/폼에 연결) ======
-  function trackLeadWithDedup() {
-    console.log('🚀 trackLeadWithDedup() 호출됨');
+  // ====== LineFriendAdd 이벤트 전송 ======
+  function trackLineFriendAdd() {
+    console.log('🚀 trackLineFriendAdd() 호출됨');
     const eventId = genEventId();
     console.log('📋 생성된 eventId:', eventId);
 
-    // 브라우저 픽셀(Lead) - 전환 이벤트
+    // 브라우저 픽셀 전송
     if (typeof window.fbq === 'function') {
       console.log('✅ fbq 함수 존재 - 브라우저 픽셀 전송');
       fbq('trackCustom', 'LineFriendAdd', {}, { eventID: eventId });
-      console.log('📊 Facebook Pixel LineFriendAdd(trackCustom) 이벤트 전송 완료');
+      console.log('📊 Facebook Pixel LineFriendAdd 이벤트 전송 완료');
     } else {
-      console.log('❌ fbq 함수 없음 - 픽셀 로드 실패, 큐에 추가 시도');
-      // 픽셀이 아직 로드되지 않은 경우 큐에 저장
+      console.log('❌ fbq 함수 없음');
       if (window.fbq && window.fbq.queue) {
-        window.fbq.queue.push(['track', 'LineFriendAdd', {}, { eventID: eventId }]);
+        window.fbq.queue.push(['trackCustom', 'LineFriendAdd', {}, { eventID: eventId }]);
         console.log('📋 이벤트 큐에 LineFriendAdd 이벤트 추가됨');
       }
     }
 
-    // 서버(CAPI) 동시 전송
+    // 서버 CAPI 전송
     console.log('🌐 서버 CAPI 전송 시작');
     sendLeadToServer(eventId);
 
     return eventId;
   }
 
+  // 로딩 모달 표시
+  function showLoadingModal() {
+    document.getElementById('loadingModal').classList.add('show');
+  }
+
+  function hideLoadingModal() {
+    document.getElementById('loadingModal').classList.remove('show');
+  }
+
   // DOM 로드 완료 후 이벤트 리스너 등록
   function initEventListeners() {
     console.log('🔧 이벤트 리스너 초기화 시작');
-    // 픽셀 상태 확인
     checkPixelStatus();
 
-    // 1) 버튼 클릭 시 Lead
+    // Sticky CTA 버튼
     const lineBtn = document.getElementById('lineButton');
     if (lineBtn) {
       // 디바이스에 맞는 LINE URL로 동적 업데이트
       lineBtn.href = LINE_URL;
       console.log('✅ 라인 버튼 찾음 - href 업데이트:', LINE_URL);
-      console.log('✅ 이벤트 리스너 등록');
+
       lineBtn.addEventListener('click', function(event) {
-        event.preventDefault(); // 기본 이동을 막아 리드 트래킹 시간을 확보
-        console.log('🎯 라인 버튼 클릭됨');
+        event.preventDefault();
+        console.log('🎯 CTA 버튼 클릭됨');
 
-        // Lead 이벤트 전송 (비동기 - CAPI와 픽셀 동시)
-        const eventId = trackLeadWithDedup();
+        // 로딩 모달 표시
+        showLoadingModal();
 
-        // CAPI/Fbq 호출이 시작될 시간을 준 뒤 같은 탭에서 LINE으로 이동
+        // LineFriendAdd 이벤트 전송
+        const eventId = trackLineFriendAdd();
+
+        // CAPI 전송 후 LINE으로 이동
         setTimeout(function() {
+          hideLoadingModal();
           window.location.href = lineBtn.href;
         }, 1200);
       });
     } else {
       console.log('❌ 라인 버튼을 찾을 수 없음');
     }
-
-    // 2) 폼 제출 시 Lead
-    const leadForm = document.getElementById('leadForm');
-    if (leadForm) {
-      console.log('✅ 리드 폼 찾음 - 이벤트 리스너 등록');
-      leadForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        trackLeadWithDedup();
-      });
-    }
-
-    // 3) 페이지 체류 10초 후 자동 안내
-    setTimeout(function() {
-      if (confirm('คุณต้องการปรึกษาแพทย์เฉพาะทางผ่าน LINE หรือไม่?')) {
-        const eventId = trackLeadWithDedup();
-        setTimeout(function() {
-          const target = lineBtn ? lineBtn.href : LINE_URL;
-          window.location.href = target;
-        }, 1200);
-      }
-    }, 10000);
   }
 
   // DOM 로드 완료 시 이벤트 리스너 초기화
