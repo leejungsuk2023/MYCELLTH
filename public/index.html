@@ -301,9 +301,36 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* ========== VIDEO SECTION ========== */
+        .video-section {
+            background: #000;
+            padding: 0;
+        }
+
+        .video-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .promo-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
+
+    <!-- ========== VIDEO SECTION ========== -->
+    <section class="video-section">
+        <div class="video-container">
+            <video class="promo-video" autoplay muted loop playsinline>
+                <source src="/promo-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero">
