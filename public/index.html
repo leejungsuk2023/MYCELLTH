@@ -325,10 +325,13 @@
     <!-- ========== VIDEO SECTION ========== -->
     <section class="video-section">
         <div class="video-container">
-            <video class="promo-video" autoplay muted loop playsinline>
+            <video id="promoVideo" class="promo-video" autoplay muted loop playsinline>
                 <source src="/promo-video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+            <script>
+                document.getElementById('promoVideo').playbackRate = 1.5;
+            </script>
         </div>
     </section>
 
